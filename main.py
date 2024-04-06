@@ -75,9 +75,14 @@ def main():
     def initialfiles():
         print('hi2')
         retval = {'one': [], 'two': []}
-        for filename in os.listdir(os.path.join(images_path, 'clipdrop')):
+        first = os.listdir(os.path.join(images_path, 'clipdrop'))
+        image_paths1 = sorted(first)
+        second = os.listdir(os.path.join(images_path, 'upsized'))
+        image_paths2 = sorted(second)
+
+        for filename in first:
             retval['one'].append({"src": os.path.join('images','clipdrop',filename), "name": filename})
-        for filename in os.listdir(os.path.join(images_path, 'upsized')):
+        for filename in second:
             retval['two'].append({"src": os.path.join('images','upsized',filename), "name": filename})
         return jsonify(retval)
 
