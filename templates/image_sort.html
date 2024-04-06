@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+<style type="text/css">
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid red;
+}
+</style>
+
+</head>
+<body>
+    <form method="POST" action="/submit">
+        
+    <h1>{{series_name}} Image Gallery</h1>
+    {% for image in images %}
+
+        <div class="image-container">
+            <div>{{image}}</div>
+            <div class="row">
+                <div class="column">
+                    <input type="checkbox" name="imageselectionone[]" value="{{ image }}" > Version 1 (manual rework)
+                </div>
+                <div class="column">
+                    <input type="checkbox" name="imageselectiontwo[]" value="{{ image }}" > Version 2 (photoshop action)
+                </div>
+                <div class="column">
+                    <input type="checkbox" name="imageselectionthree[]" value="{{ image }}" > Version 3 (clipdrop)
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <input type="checkbox" name="promote[]" value="{{ image }}" > promote to front
+                </div>
+                <div class="column">
+                    <input type="checkbox" name="imagereworktwo[]" value="{{ image }}" > rework from 2
+                </div>
+                <div class="column">
+                    <input type="checkbox" name="imagereworkthree[]" value="{{ image }}" > rework from 3
+                </div>
+            </div>
+            <div style="background-color: #fff;" class="row">
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='originals', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px"  />
+                </div>
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='photoshop', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px" />
+                </div>
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='clipdrop', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px"  />
+                </div>
+            </div>
+            <div style="background-color: #000;" class="row">
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='originals', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px"  />
+                </div>
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='photoshop', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px" />
+                </div>
+                <div class="column">                    
+                    <img src="{{ url_for('get_image', folder_name='clipdrop', image_name=image) }}" alt="{{ image }}" class="image" style="width:200px"  />
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+        </div>
+    {% endfor %}
+
+    <input type="submit" value="go">
+    </form>
+</body>
+</html>
